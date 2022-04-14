@@ -4,8 +4,9 @@ export default defineAppConfig({
   ],
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#fff',
+    navigationBarBackgroundColor: '#8F1D22',
     navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
-  }
+    navigationBarTextStyle: 'white'
+  },
+  "lazyCodeLoading": "requiredComponents"
 })
