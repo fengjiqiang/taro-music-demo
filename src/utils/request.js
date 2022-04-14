@@ -15,8 +15,8 @@ export function request(req) {
     }
     return Taro.request({
         url: url.indexOf('https://') == -1 ? hostConfig.host + url : url,
-        method: method,
-        data: data,
+        method,
+        data,
         header: {
             ...header,
             'Authorization': '',   // 实际项目开发请求接口的token
@@ -24,14 +24,14 @@ export function request(req) {
     }).then(response => {
         console.log(`此【${url}】请求返回`, response);
         if (response.statusCode == 200) {
-            if (response.data && response.data.code == 440001) {
+            if (response.data?.code == 440001) {
                 return Promise.reject(response.data)
             } else {
                 return response.data
             }
         }
     }).catch(err => {
-        if (err && err.errMsg == 'request:fail ') {
+        if (err?.errMsg == 'request:fail ') {
             return Promise.reject({ msg: '网络错误' })
         }
         return Promise.reject(err)
