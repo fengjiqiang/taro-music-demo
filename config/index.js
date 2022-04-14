@@ -1,3 +1,5 @@
+const path = require('path');
+
 const config = {
   projectName: 'taro-music-demo',
   date: '2022-4-14',
@@ -19,6 +21,9 @@ const config = {
     }
   },
   framework: 'react',
+  alias: {
+    '@': path.resolve(__dirname, '..', 'src'),
+  },
   mini: {
     postcss: {
       pxtransform: {
@@ -45,6 +50,7 @@ const config = {
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
+    esnextModules: ['taro-ui'], // 由于引用 `node_modules` 的模块，默认不会编译，所以需要额外给 H5 配置 `esnextModules`
     postcss: {
       autoprefixer: {
         enable: true,
