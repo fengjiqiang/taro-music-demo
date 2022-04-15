@@ -49,28 +49,6 @@ const titles = Random.shuffle([
     "麦田里的守望者"
 ]);
 
-const images = [
-    "http://qiniu.library-online.cn/image1.jpg",
-    "http://qiniu.library-online.cn/image10.jpeg",
-    "http://qiniu.library-online.cn/image12.jpeg",
-    "http://qiniu.library-online.cn/image13.jpeg",
-    "http://qiniu.library-online.cn/image14.jpg",
-    "http://qiniu.library-online.cn/image16.jpg",
-    "http://qiniu.library-online.cn/image17.jpg",
-    "http://qiniu.library-online.cn/image2.jpg",
-    "http://qiniu.library-online.cn/image20.png",
-    "http://qiniu.library-online.cn/image21.png",
-    "http://qiniu.library-online.cn/image22.png",
-    "http://qiniu.library-online.cn/image23.png",
-    "http://qiniu.library-online.cn/image24.png",
-    "http://qiniu.library-online.cn/image3.jpg",
-    "http://qiniu.library-online.cn/image4.jpg",
-    "http://qiniu.library-online.cn/image5.jpg",
-    "http://qiniu.library-online.cn/image6.jpeg",
-    "http://qiniu.library-online.cn/image7.jpg",
-    "http://qiniu.library-online.cn/image8.png",
-    "http://qiniu.library-online.cn/image9.jpg"
-];
 
 const authors = (function () {
     let t = ["[哥]加西亚·马尔克斯", "[英]毛姆", "[法]圣-埃克苏佩里"];
@@ -99,7 +77,8 @@ const data = Mock.mock({
             tags: ["小说", "文学", "名著"],
             score: "@float(0, 10, 1, 1)",
             review_num: "@integer(60, 100)",
-            "image|+1": images,
+            // "image|+1": images,
+            image: 'https://boom-beiyan-sitemgt.oss-cn-beijing.aliyuncs.com/resource/1649295786624e41aa5a3f1.jpeg',
             introduction:
                 "12岁的阿富汗富家少爷阿米尔与仆人哈桑情同手足。然而，在一场风筝比赛后，发生了一件悲惨不堪的事，阿米尔为自己的懦弱感到自责和痛苦，逼走了哈桑，不久，自己也跟随父亲逃往美国。\n成年后的阿米尔始终无法原谅自己当年对哈桑的背叛。为了赎罪，阿米尔再度踏上暌违二十多年的故乡，希望能为不幸的好友尽最后一点心力，却发现一个惊天谎言，儿时的噩梦再度重演，阿米尔该如何抉择？\n故事如此残忍而又美丽，作者以温暖细腻的笔法勾勒人性的本质与救赎，读来令人荡气回肠。"
         }

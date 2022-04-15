@@ -6,9 +6,9 @@ let host = '';   // api接口地址
 console.log(ev, '当前js环境')
 log.info('当前js环境====>: ' + ev)
 if (ev === 'development') {
-    host = '';
+    host = 'http://172.23.11.47:3721';
 } else {
-    host = '';
+    host = 'http://172.23.11.47:3721';
 }
 const hostConfig = {
     host
