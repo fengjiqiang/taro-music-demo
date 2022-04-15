@@ -1,32 +1,22 @@
 import { Component } from 'react'
 import Taro from '@tarojs/taro'
-import { ScrollView, View, Text } from '@tarojs/components'
-import { AtList, AtListItem, AtActivityIndicator } from "taro-ui"
+import { View, Text } from '@tarojs/components'
+import { AtList, AtListItem, AtIcon, AtCard } from "taro-ui"
 import log from '@/utils/log'
 import AllConfigSet from '@/utils/config'
 import { getBookList } from '@/actions/book'
 
 import './index.less'
 
-const scrollTop = 0   // 设置竖向滚动条位置
 
 export default class Index extends Component {
 
   state = {
     book: [],
-    scrollHeight: 700,
-    current: 1,
-    pageSize: 12,
-    total: 0,
-    loading: false,
-    hasMore: true,
+    pageSize: 3
   }
 
-  componentWillMount () {
-    const { windowHeight } = AllConfigSet.appData
-    console.log('windowHeight :>> ', windowHeight);
-    this.setState({ scrollHeight: windowHeight })
-  }
+  componentWillMount () { }
 
   componentDidMount () {
     this.refreshList()
@@ -45,21 +35,15 @@ export default class Index extends Component {
   }
 
   getBookList = (current) => {
-    this.setState({ loading: true })
     return getBookList({
       current,
-      pageSize: this.state.pageSize
+      pageSize: this.state.pageSize,
+
     }).then(res => {
-      this.setState({
-        current: res.pageInfo.current,
-        total: res.pageInfo.total
-      })
       return res.lists
     }).catch(err => {
       console.log('getBookList=>err', err)
       log.error("getBookList=>err: " + err)
-    }).finally(() => {
-      this.setState({ loading: false })
     })
   }
 
@@ -69,70 +53,76 @@ export default class Index extends Component {
     })
   }
 
-  getMoreData = () => {
-    if (this.state.book.length >= this.state.total) {
-      this.setState({ hasMore: false })
-      return
-    }
-    this.getBookList(this.state.current + 1).then(data => {
-      let newList = this.state.book.concat(data)
-      this.setState({ book: newList })
-    })
-  }
-
   renderBookItem = () => {
     return (
       this.state.book.map(item => {
         return (
-          <AtList key={item.id}>
-            <AtListItem
-              arrow='right'
-              note={item.author}
+          // List 列表
+          // <AtList key={item.id}>
+          //   <AtListItem
+          //     arrow='right'
+          //     note={item.author}
+          //     title={item.title}
+          //     extraText={item.pubdate}
+          //     onClick={() => {
+          //       Taro.navigateTo({
+          //         url: `../bookDetails/bookDetails?data=${JSON.stringify(item)}`
+          //       });
+          //     }}
+          //   />
+          // </AtList>
+          // Card 卡片
+          <View key={item.id} style={{ marginTop: 10 }}>
+            <AtCard
+              className='my-card'
+              // note='小Tips'
+              extra={item.author}
               title={item.title}
-              extraText={item.pubdate}
               onClick={() => {
                 Taro.navigateTo({
                   url: `../bookDetails/bookDetails?data=${JSON.stringify(item)}`
                 });
               }}
-            />
-          </AtList>
+            >
+              <View className='line-clamp-2'>
+                {item.introduction}
+              </View>
+            </AtCard>
+          </View>
         )
       })
     )
   }
 
-  onScroll = (e) => {
-    console.log('onScroll :>>', e.detail)
-  }
-
   render () {
-    
+    const baseStyle = {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center'
+    }
     return (
-      <ScrollView
-        className='scrollview'
-        scrollY
-        scrollWithAnimation
-        scrollTop={scrollTop}
-        style={{ height: this.state.scrollHeight }}
-        onScrollToUpper={this.refreshList}
-        onScrollToLower={this.getMoreData}
-        // onScroll={this.onScroll}
-      >
+      <View style={{ flex: 1 }}>
+        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 10, paddingRight: 10, marginTop: 10, marginBottom: 10 }}>
+          <View style={baseStyle}>
+            <AtIcon value='money' size='20' color={AllConfigSet.basicModalBtn} />
+            <Text style={{ fontSize: 18, color: '#333', marginLeft: 5 }}>推荐书籍</Text>
+          </View>
+          <View
+            style={baseStyle}
+            onClick={() => {
+              Taro.navigateTo({
+                url: '../book/book'
+              })
+            }}
+          >
+            <Text style={{ fontSize: 16, color: '#999' }}>更多</Text>
+            <View className='at-icon at-icon-chevron-right' style={{ color: '#999' }} />
+          </View>
+        </View>
         <View style={{ flex: 1 }}>
           {this.renderBookItem()}
-          {
-            this.state.loading &&
-            <AtActivityIndicator content='加载中...' mode='center' color={AllConfigSet.basicModalBtn} size={40} />
-          }
-          {
-            !this.state.hasMore &&
-            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginVertical: 10 }}>
-                <Text style={{ color: '#999', fontSize: 12 }}>没有更多了</Text>
-            </View>
-          }
         </View>
-      </ScrollView>
+      </View>
     )
   }
 }
