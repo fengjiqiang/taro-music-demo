@@ -38,6 +38,12 @@ export default class Index extends Component {
 
   componentDidHide () { }
 
+  onShareAppMessage() {
+    return {
+      path: `/pages/index/index`
+    }
+  }
+
   getBookList = (current) => {
     this.setState({ loading: true })
     return getBookList({
