@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { ScrollView, View, Text } from '@tarojs/components'
-import { AtList, AtListItem, AtActivityIndicator } from "taro-ui"
+import { AtList, AtListItem, AtActivityIndicator, AtDivider } from "taro-ui"
 import log from '@/utils/log'
 import AllConfigSet from '@/utils/config'
 import { getBookList } from '@/actions/book'
@@ -127,9 +127,7 @@ export default class Book extends Component {
                         }
                         {
                             !this.state.hasMore &&
-                            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginVertical: 10 }}>
-                                <Text style={{ color: '#999', fontSize: 12 }}>没有更多了</Text>
-                            </View>
+                            <AtDivider content='没有更多了' fontColor={AllConfigSet.basicModalBtn} lineColor='#fff' />
                         }
                     </View>
                 </ScrollView>
