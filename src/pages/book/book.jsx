@@ -5,6 +5,7 @@ import { AtList, AtListItem, AtActivityIndicator, AtDivider } from "taro-ui"
 import log from '@/utils/log'
 import AllConfigSet from '@/utils/config'
 import { getBookList } from '@/actions/book'
+import RLTheme from '@/components/RLTheme'
 
 
 const scrollTop = 0   // 设置竖向滚动条位置
@@ -123,11 +124,11 @@ export default class Book extends Component {
                         {this.renderBookItem()}
                         {
                             this.state.loading &&
-                            <AtActivityIndicator content='加载中...' mode='center' color={AllConfigSet.basicModalBtn} size={40} />
+                            <AtActivityIndicator content='加载中...' mode='center' color={RLTheme.themeColor} size={40} />
                         }
                         {
                             !this.state.hasMore &&
-                            <AtDivider content='没有更多了' fontColor={AllConfigSet.basicModalBtn} lineColor='#fff' />
+                            <AtDivider content='没有更多了' fontColor={RLTheme.themeColor} lineColor='#fff' />
                         }
                     </View>
                 </ScrollView>

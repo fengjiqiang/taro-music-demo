@@ -1,7 +1,6 @@
 import Taro from '@tarojs/taro'
 
 const AllConfigSet = {
-    basicModalBtn: '#8F1D22',
     capsule: Taro.getMenuButtonBoundingClientRect,
     appData: Taro.getSystemInfoSync(),
     tVmin: (rpx) => {

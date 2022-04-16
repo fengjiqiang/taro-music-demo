@@ -1,9 +1,9 @@
 import { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Image, Swiper, SwiperItem } from '@tarojs/components'
-import { AtList, AtListItem, AtIcon, AtCard, AtNoticebar } from "taro-ui"
+import { AtList, AtListItem, AtIcon, AtCard, AtNoticebar, AtNavBar } from "taro-ui"
 import log from '@/utils/log'
-import AllConfigSet from '@/utils/config'
+import RLTheme from '@/components/RLTheme'
 import { getBookList } from '@/actions/book'
 
 import './index.less'
@@ -108,7 +108,7 @@ export default class Index extends Component {
     return (
       <Swiper
         indicatorColor='#999'
-        indicatorActiveColor={AllConfigSet.basicModalBtn}
+        indicatorActiveColor={RLTheme.themeColor}
         circular
         indicatorDots
         autoplay
@@ -145,7 +145,7 @@ export default class Index extends Component {
         {this.renderBanner()}
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 10, paddingRight: 10, marginTop: 10, marginBottom: 10 }}>
           <View style={baseStyle}>
-            <AtIcon value='money' size='20' color={AllConfigSet.basicModalBtn} />
+            <AtIcon value='money' size='20' color={RLTheme.themeColor} />
             <Text style={{ fontSize: 18, color: '#333', marginLeft: 5 }}>推荐书籍</Text>
           </View>
           <View
